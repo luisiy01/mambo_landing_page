@@ -1,121 +1,214 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { motion } from 'framer-motion';
+import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react';
+import { CertificationsSlider } from './components/CertificationsSlider';
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const certs = [
+    "Módulo 1: Fundamentos y Técnica",
+    "Módulo 2: Estructura y Ritmo",
+    "Módulo 3: Ingeniería del Mambo",
+    "Módulo 4: Danza Moderna Cubana",
+    "Módulo 5: Estilo y Expresión",
+    "Módulo 6: Performance y Maestría"
+  ];
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-blue-500 selection:text-white">
+
+      {/* --- NAV BAR --- */}
+      <nav className="fixed top-0 w-full z-50 bg-[#020617]/80 backdrop-blur-md border-b border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="font-black italic text-xl tracking-tighter text-blue-500">LUIS.MAMBO</span>
+          <div className="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest text-slate-400">
+            <a href="#perfil" className="hover:text-blue-400 transition-colors">Perfil</a>
+            <a href="#formacion" className="hover:text-blue-400 transition-colors">Formación</a>
+            <a href="#clases" className="hover:text-blue-400 transition-colors">Clases</a>
+          </div>
+          <button className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-tighter transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+            Contacto
+          </button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
+      </nav>
+
+      {/* --- HERO SECTION --- */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-[#020617]/80 to-[#020617] z-10" />
+          {/* Aquí iría tu video de los zapatos morados */}
+          <video
+            autoPlay loop muted playsInline
+            className="w-full h-full object-cover opacity-40 scale-110"
+          >
+            <source src="/tu-video-salsa.mp4" type="video/mp4" />
+          </video>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative z-20 text-center px-4"
         >
-          Count is {count}
-        </button>
-      </section>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-8"
+          >
+            <Zap size={14} /> NewyoRican Mambo Certified
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mb-8 p-4 rounded-2xl bg-black/30 border border-slate-800 backdrop-blur-sm shadow-xl w-fit mx-auto flex items-center justify-center"
+          >
+            <img
+              src="/image_63.jpg"
+              alt="NewyoRican Mambo Certified"
+              className="h-12 md:h-16 w-auto object-contain"
+            />
+          </motion.div>
 
-      <div className="ticks"></div>
+          <h1 className="text-7xl md:text-[10rem] font-black leading-[0.8] tracking-tighter italic uppercase">
+            <span className="block text-slate-100">Luis</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-400 to-cyan-400 drop-shadow-[0_0_35px_rgba(37,99,235,0.5)]">Nuñez</span>
+          </h1>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+          <p className="mt-8 text-lg md:text-2xl max-w-2xl mx-auto text-slate-400 font-light leading-relaxed">
+            Donde la <span className="text-slate-100 font-medium">lógica de la ingeniería</span> se encuentra con la <span className="text-blue-400 font-semibold italic">geometría del Mambo</span>.
+          </p>
+
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
+            <button className="group relative px-10 py-4 bg-blue-600 rounded-full font-bold overflow-hidden transition-all">
+              <span className="relative z-10 flex items-center gap-2">VER SHOWREEL <ChevronRight size={18} /></span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Decoración lateral */}
+        <div className="absolute left-10 bottom-10 hidden lg:block">
+          <div className="flex flex-col gap-4 text-slate-500 border-l border-slate-800 pl-4 text-[10px] tracking-[0.2em] uppercase font-bold">
+            <span>React.js</span>
+            <span>.NET</span>
+            <span>Salsa On2</span>
+          </div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* --- SECCIÓN PERFIL DUAL --- */}
+      <section id="perfil" className="py-32 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="md:col-span-8 p-10 rounded-[2.5rem] bg-slate-900/50 border border-slate-800/50 hover:border-blue-500/30 transition-all flex flex-col justify-center relative overflow-hidden group"
+          >
+            <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-600/10 blur-[100px] group-hover:bg-blue-600/20 transition-all" />
+            <h2 className="text-4xl font-bold mb-6 flex items-center gap-4">
+              <Code className="text-blue-500" size={32} /> El Perfil Dual
+            </h2>
+            <p className="text-slate-400 text-xl leading-relaxed max-w-2xl">
+              Ingeniero de Software de profesión y bailarín de alto rendimiento por pasión.
+              Aplico la <span className="text-slate-100 font-semibold">disciplina y el análisis</span> que uso para escribir código para diseccionar
+              la técnica de giros y la musicalidad avanzada.
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="md:col-span-4 p-10 rounded-[2.5rem] bg-blue-600 flex flex-col justify-between text-white shadow-[0_20px_50px_rgba(37,99,235,0.2)]"
+          >
+            <Music size={48} strokeWidth={1.5} />
+            <div>
+              <h3 className="text-5xl font-black mb-2 italic">+10 AÑOS</h3>
+              <p className="text-blue-100 font-medium leading-tight">De trayectoria en técnica académica y baile social.</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- SLIDER INFINITO DE CERTIFICACIONES --- */}
+      <section id="formacion" className="py-24 bg-slate-900/20 border-y border-slate-800/50">
+        <div className="text-center mb-16 px-4">
+          <h2 className="text-xs font-black text-blue-500 tracking-[0.4em] uppercase mb-4">Authority Statement</h2>
+          <h3 className="text-4xl md:text-5xl font-black italic uppercase">Formación de Élite</h3>
+          <p className="text-slate-500 mt-2 font-medium">Graduado del Programa Intensivo Completo (Módulos 1-6)</p>
+        </div>
+
+        <div className="relative flex overflow-hidden py-10">
+          <motion.div
+            className="flex gap-8 whitespace-nowrap"
+            animate={{ x: [0, -1920] }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          >
+            {[...certs, ...certs].map((item, index) => (
+              <div
+                key={index}
+                className="w-80 p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all group relative"
+              >
+                <div className="absolute top-6 right-8 text-blue-950 font-black text-4xl opacity-20 group-hover:opacity-40 transition-opacity">0{(index % 6) + 1}</div>
+                <Award className="text-blue-500 mb-6" size={40} strokeWidth={1.5} />
+                <h4 className="font-bold text-xl text-slate-100 mb-2 leading-tight">{item}</h4>
+                <p className="text-[10px] text-blue-400 uppercase tracking-widest font-black">NewyoRican Mambo CDMX</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- SECCIÓN DE CLASES --- */}
+      <section id="clases" className="py-32 px-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-6xl font-black italic tracking-tighter mb-8 leading-none">
+              APRENDE CON <br /><span className="text-blue-500">MÉTODO.</span>
+            </h2>
+            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+              No solo bailo por instinto; bailo con fundamento. Mis clases combinan la
+              <span className="text-slate-100"> pedagogía profesional</span> con la claridad estructural de un ingeniero.
+            </p>
+            <div className="space-y-4">
+              {['Técnica de Giros Física', 'Musicalidad Analítica', 'Estilo Masculino con Propósito'].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 font-bold text-sm tracking-wide">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500" /> {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            <div className="p-8 rounded-[2rem] bg-slate-900 border border-slate-800 hover:bg-slate-800/50 transition-all group">
+              <Users className="text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold mb-2">Clases Individuales</h3>
+              <p className="text-slate-500 text-sm italic">Enfoque 100% técnico y personalizado para corregir vicios de movimiento.</p>
+            </div>
+            <div className="p-8 rounded-[2rem] bg-slate-900 border border-slate-800 hover:bg-slate-800/50 transition-all group text-right">
+              <Zap className="text-blue-500 mb-4 ml-auto group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold mb-2">Workshops Grupales</h3>
+              <p className="text-slate-500 text-sm italic">Entrenamiento intensivo por módulos para escuelas o grupos coreográficos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- FOOTER --- */}
+      <footer className="py-20 border-t border-slate-900 text-center relative overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-blue-600/5 blur-[100px]" />
+        <div className="flex justify-center gap-8 mb-10">
+          <motion.a whileHover={{ y: -3 }} href="https://instagram.com/luisiy0" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
+            instagram icon
+          </motion.a>
+          <motion.a whileHover={{ y: -3 }} href="#" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
+            <Send size={20} className="-rotate-45" />
+          </motion.a>
+        </div>
+        <p className="text-slate-500 text-[10px] uppercase tracking-[0.5em] font-black">
+          © 2026 LUIS NUÑEZ <span className="mx-2 text-blue-900">|</span> HECHO CON RITMO & REACT
+        </p>
+      </footer>
+    </div>
+  );
 }
 
 export default App
