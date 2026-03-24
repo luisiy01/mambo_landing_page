@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react';
-import { CertificationsSlider } from './components/CertificationsSlider';
 
 function App() {
 
@@ -39,7 +38,7 @@ function App() {
             autoPlay loop muted playsInline
             className="w-full h-full object-cover opacity-40 scale-110"
           >
-            <source src="/tu-video-salsa.mp4" type="video/mp4" />
+            <source src="/newvideo.mp4" type="video/mp4" />
           </video>
         </div>
 
@@ -57,18 +56,7 @@ function App() {
           >
             <Zap size={14} /> NewyoRican Mambo Certified
           </motion.div>
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-8 p-4 rounded-2xl bg-black/30 border border-slate-800 backdrop-blur-sm shadow-xl w-fit mx-auto flex items-center justify-center"
-          >
-            <img
-              src="/image_63.jpg"
-              alt="NewyoRican Mambo Certified"
-              className="h-12 md:h-16 w-auto object-contain"
-            />
-          </motion.div>
+
 
           <h1 className="text-7xl md:text-[10rem] font-black leading-[0.8] tracking-tighter italic uppercase">
             <span className="block text-slate-100">Luis</span>
@@ -86,15 +74,6 @@ function App() {
             </button>
           </div>
         </motion.div>
-
-        {/* Decoración lateral */}
-        <div className="absolute left-10 bottom-10 hidden lg:block">
-          <div className="flex flex-col gap-4 text-slate-500 border-l border-slate-800 pl-4 text-[10px] tracking-[0.2em] uppercase font-bold">
-            <span>React.js</span>
-            <span>.NET</span>
-            <span>Salsa On2</span>
-          </div>
-        </div>
       </section>
 
       {/* --- SECCIÓN PERFIL DUAL --- */}
@@ -133,7 +112,20 @@ function App() {
         <div className="text-center mb-16 px-4">
           <h2 className="text-xs font-black text-blue-500 tracking-[0.4em] uppercase mb-4">Authority Statement</h2>
           <h3 className="text-4xl md:text-5xl font-black italic uppercase">Formación de Élite</h3>
-          <p className="text-slate-500 mt-2 font-medium">Graduado del Programa Intensivo Completo (Módulos 1-6)</p>
+
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mt-8 mb-8 p-4 rounded-2xl bg-black/30 border border-slate-800 backdrop-blur-sm shadow-xl w-fit mx-auto flex items-center justify-center"
+          >
+            <img
+              src="/image_63.jpg"
+              alt="NewyoRican Mambo Certified"
+              className="h-12 md:h-16 w-auto object-contain"
+            />
+          </motion.div>
+          <p className="text-slate-500 mt-2 font-medium">Graduado del Programa Intensivo(Módulos 1-6) +240hrs de Entrenamiento</p>
         </div>
 
         <div className="relative flex overflow-hidden py-10">
