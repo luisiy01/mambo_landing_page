@@ -7,7 +7,7 @@ function App() {
   const [showVideo, setShowVideo] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedCert, setSelectedCert] = useState(null);
+  const [selectedCert, setSelectedCert] = useState<{ title: string; img: string; } | null>(null);
 
   const certs = [
     { title: "Módulo 1: Fundamentos y Técnica", img: "/cert_1.jpg" },
