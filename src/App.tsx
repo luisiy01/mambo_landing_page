@@ -15,6 +15,11 @@ function App() {
     "Módulo 5: Estilo y Expresión",
     "Módulo 6: Performance y Maestría"
   ];
+
+  const whatsappNumber = "523121016033";
+  const message = encodeURIComponent("Hola Luis, vi tu landing page de Mambo y me interesa agendar una clase o recibir más información.");
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-blue-500 selection:text-white">
 
@@ -195,9 +200,6 @@ function App() {
       <footer className="py-20 border-t border-slate-900 text-center relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-blue-600/5 blur-[100px]" />
         <div className="flex justify-center gap-8 mb-10">
-          <motion.a whileHover={{ y: -3 }} href="https://instagram.com/luisiy0" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
-            instagram icon
-          </motion.a>
           <motion.a whileHover={{ y: -3 }} href="#" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
             <Send size={20} className="-rotate-45" />
           </motion.a>
@@ -253,7 +255,7 @@ function App() {
             <p className="text-slate-400 mb-8 text-sm">Selecciona cómo prefieres conectar conmigo:</p>
 
             <div className="space-y-4">
-              <a href="https://wa.me/TUNUMERO" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-blue-600 transition-all group">
+              <a href={whatsappLink} className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-blue-600 transition-all group">
                 <span className="font-bold">WhatsApp Directo</span>
                 <ChevronRight className="group-hover:translate-x-1 transition-transform" />
               </a>
