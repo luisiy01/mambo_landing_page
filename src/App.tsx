@@ -5,6 +5,7 @@ import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react
 function App() {
 
   const [showVideo, setShowVideo] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const certs = [
     "Módulo 1: Fundamentos y Técnica",
@@ -26,7 +27,7 @@ function App() {
             <a href="#formacion" className="hover:text-blue-400 transition-colors">Formación</a>
             <a href="#clases" className="hover:text-blue-400 transition-colors">Clases</a>
           </div>
-          <button className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-tighter transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+          <button onClick={() => setIsContactOpen(true)} className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-tighter transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
             Contacto
           </button>
         </div>
@@ -233,6 +234,38 @@ function App() {
               allow="autoplay; encrypted-media"
               allowFullScreen
             ></iframe>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {isContactOpen && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
+            className="bg-slate-900 border border-blue-500/30 p-10 rounded-[3rem] max-w-md w-full relative"
+          >
+            <button onClick={() => setIsContactOpen(false)} className="absolute top-6 right-8 text-slate-500 hover:text-white">✕</button>
+
+            <h3 className="text-3xl font-black italic mb-2 text-blue-500">¿BAILAMOS?</h3>
+            <p className="text-slate-400 mb-8 text-sm">Selecciona cómo prefieres conectar conmigo:</p>
+
+            <div className="space-y-4">
+              <a href="https://wa.me/TUNUMERO" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-blue-600 transition-all group">
+                <span className="font-bold">WhatsApp Directo</span>
+                <ChevronRight className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a href="mailto:tu@email.com" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all">
+                <span className="font-bold">Enviar Correo</span>
+                <Send size={18} />
+              </a>
+              <a href="https://instagram.com/luisiy0" target="_blank" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-pink-600 transition-all">
+                <span className="font-bold">Instagram DM</span>
+                instagram icon
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       )}
