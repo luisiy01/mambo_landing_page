@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react';
 
 function App() {
+
+  const [showVideo, setShowVideo] = useState(false);
 
   const certs = [
     "Módulo 1: Fundamentos y Técnica",
@@ -68,7 +71,10 @@ function App() {
           </p>
 
           <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
-            <button className="group relative px-10 py-4 bg-blue-600 rounded-full font-bold overflow-hidden transition-all">
+            <button
+              onClick={() => setShowVideo(true)}
+              className="group relative px-10 py-4 bg-blue-600 rounded-full font-bold overflow-hidden transition-all shadow-lg shadow-blue-600/20"
+            >
               <span className="relative z-10 flex items-center gap-2">VER SHOWREEL <ChevronRight size={18} /></span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
@@ -199,6 +205,37 @@ function App() {
           © 2026 LUIS NUÑEZ <span className="mx-2 text-blue-900">|</span> HECHO CON RITMO & REACT
         </p>
       </footer>
+      {showVideo && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setShowVideo(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-blue-500/30"
+            onClick={(e) => e.stopPropagation()} // Evita que se cierre al clickear el video
+          >
+            <button
+              className="absolute top-4 right-4 text-white z-10 bg-black/50 p-2 rounded-full hover:bg-blue-600"
+              onClick={() => setShowVideo(false)}
+            >
+              ✕
+            </button>
+
+            {/* Aquí puedes usar un video local o un link de YouTube/Vimeo */}
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/TU_ID_DE_VIDEO?autoplay=1"
+              title="Luis Nuñez Showreel"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
