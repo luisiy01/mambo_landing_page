@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react';
 
 function App() {
+
+  const [showVideo, setShowVideo] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const certs = [
     "Módulo 1: Fundamentos y Técnica",
@@ -11,6 +15,11 @@ function App() {
     "Módulo 5: Estilo y Expresión",
     "Módulo 6: Performance y Maestría"
   ];
+
+  const whatsappNumber = "523121016033";
+  const message = encodeURIComponent("Hola Luis, vi tu landing page de Mambo y me interesa agendar una clase o recibir más información.");
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-blue-500 selection:text-white">
 
@@ -23,7 +32,7 @@ function App() {
             <a href="#formacion" className="hover:text-blue-400 transition-colors">Formación</a>
             <a href="#clases" className="hover:text-blue-400 transition-colors">Clases</a>
           </div>
-          <button className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-tighter transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+          <button onClick={() => setIsContactOpen(true)} className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-tighter transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
             Contacto
           </button>
         </div>
@@ -68,7 +77,10 @@ function App() {
           </p>
 
           <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
-            <button className="group relative px-10 py-4 bg-blue-600 rounded-full font-bold overflow-hidden transition-all">
+            <button
+              onClick={() => setShowVideo(true)}
+              className="group relative px-10 py-4 bg-blue-600 rounded-full font-bold overflow-hidden transition-all shadow-lg shadow-blue-600/20"
+            >
               <span className="relative z-10 flex items-center gap-2">VER SHOWREEL <ChevronRight size={18} /></span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
@@ -188,9 +200,6 @@ function App() {
       <footer className="py-20 border-t border-slate-900 text-center relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-blue-600/5 blur-[100px]" />
         <div className="flex justify-center gap-8 mb-10">
-          <motion.a whileHover={{ y: -3 }} href="https://instagram.com/luisiy0" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
-            instagram icon
-          </motion.a>
           <motion.a whileHover={{ y: -3 }} href="#" className="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all">
             <Send size={20} className="-rotate-45" />
           </motion.a>
@@ -199,6 +208,69 @@ function App() {
           © 2026 LUIS NUÑEZ <span className="mx-2 text-blue-900">|</span> HECHO CON RITMO & REACT
         </p>
       </footer>
+      {showVideo && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setShowVideo(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-blue-500/30"
+            onClick={(e) => e.stopPropagation()} // Evita que se cierre al clickear el video
+          >
+            <button
+              className="absolute top-4 right-4 text-white z-10 bg-black/50 p-2 rounded-full hover:bg-blue-600"
+              onClick={() => setShowVideo(false)}
+            >
+              ✕
+            </button>
+
+            {/* Aquí puedes usar un video local o un link de YouTube/Vimeo */}
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/TU_ID_DE_VIDEO?autoplay=1"
+              title="Luis Nuñez Showreel"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {isContactOpen && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
+            className="bg-slate-900 border border-blue-500/30 p-10 rounded-[3rem] max-w-md w-full relative"
+          >
+            <button onClick={() => setIsContactOpen(false)} className="absolute top-6 right-8 text-slate-500 hover:text-white">✕</button>
+
+            <h3 className="text-3xl font-black italic mb-2 text-blue-500">¿BAILAMOS?</h3>
+            <p className="text-slate-400 mb-8 text-sm">Selecciona cómo prefieres conectar conmigo:</p>
+
+            <div className="space-y-4">
+              <a href={whatsappLink} className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-blue-600 transition-all group">
+                <span className="font-bold">WhatsApp Directo</span>
+                <ChevronRight className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a href="mailto:tu@email.com" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all">
+                <span className="font-bold">Enviar Correo</span>
+                <Send size={18} />
+              </a>
+              <a href="https://instagram.com/luisiy0" target="_blank" className="flex items-center justify-between p-4 bg-slate-800 rounded-2xl hover:bg-pink-600 transition-all">
+                <span className="font-bold">Instagram DM</span>
+                instagram icon
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
