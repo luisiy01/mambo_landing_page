@@ -1,19 +1,21 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Award, Code, Music, Users, Send, Zap, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Award, Code, Music, Users, Send, Zap, ChevronRight, X, ZoomIn } from 'lucide-react';
 
 function App() {
 
   const [showVideo, setShowVideo] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [selectedCert, setSelectedCert] = useState(null);
 
   const certs = [
-    "Módulo 1: Fundamentos y Técnica",
-    "Módulo 2: Estructura y Ritmo",
-    "Módulo 3: Ingeniería del Mambo",
-    "Módulo 4: Danza Moderna Cubana",
-    "Módulo 5: Estilo y Expresión",
-    "Módulo 6: Performance y Maestría"
+    { title: "Módulo 1: Fundamentos y Técnica", img: "/cert_1.jpg" },
+    { title: "Módulo 2: Estructura y Ritmo", img: "/cert_2.jpg" },
+    { title: "Módulo 3: Ingeniería del Mambo", img: "/cert_3.jpg" },
+    { title: "Módulo 4: Danza Moderna Cubana", img: "/cert_4.jpg" },
+    { title: "Módulo 5: Estilo y Expresión", img: "/cert_5.jpg" },
+    { title: "Módulo 6: Performance y Maestría", img: "/cert_6.jpg" }
   ];
 
   const whatsappNumber = "523121016033";
@@ -143,19 +145,46 @@ function App() {
         <div className="relative flex overflow-hidden py-10">
           <motion.div
             className="flex gap-8 whitespace-nowrap"
-            animate={{ x: [0, -1920] }}
+            animate={{ x: isPaused ? 0 : [0, -1920] }}
             transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            {[...certs, ...certs].map((item, index) => (
-              <div
+            {[...certs, ...certs].map((cert, index) => (
+              <motion.div
                 key={index}
-                className="w-80 p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all group relative"
+                className="w-80 p-6 rounded-3xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 transition-all group relative flex flex-col"
+                // 2. Al hacer clic, guardamos el certificado seleccionado
+                onClick={() => setSelectedCert(cert)}
+                whileHover={{ y: -5 }} // Pequeño levantamiento visual en hover
               >
-                <div className="absolute top-6 right-8 text-blue-950 font-black text-4xl opacity-20 group-hover:opacity-40 transition-opacity">0{(index % 6) + 1}</div>
-                <Award className="text-blue-500 mb-6" size={40} strokeWidth={1.5} />
-                <h4 className="font-bold text-xl text-slate-100 mb-2 leading-tight">{item}</h4>
-                <p className="text-[10px] text-blue-400 uppercase tracking-widest font-black">NewyoRican Mambo CDMX</p>
-              </div>
+                {/* Número de fondo */}
+                <div className="absolute top-6 right-8 text-blue-950 font-black text-4xl opacity-20 group-hover:opacity-40 transition-opacity">
+                  0{(index % 6) + 1}
+                </div>
+
+                <Award className="text-blue-500 mb-4" size={32} strokeWidth={1.5} />
+
+                {/* Contenedor de Imagen con icono de Zoom */}
+                <div className="relative w-full h-44 mb-6 overflow-hidden rounded-xl border border-slate-700 bg-black group-hover:border-blue-500/30 transition-all shadow-inner group">
+                  <img
+                    src={cert.img}
+                    alt={cert.title}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                  />
+                  {/* Icono de Zoom que aparece en hover */}
+                  <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                    <ZoomIn className="text-white" size={30} />
+                  </div>
+                </div>
+
+                <h4 className="font-bold text-lg text-slate-100 mb-2 leading-tight whitespace-normal">
+                  {cert.title}
+                </h4>
+                <p className="text-[10px] text-blue-400 uppercase tracking-widest font-black">
+                  NewyoRican Mambo CDMX
+                </p>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -271,6 +300,66 @@ function App() {
           </motion.div>
         </motion.div>
       )}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 md:p-10"
+            // Cerrar al hacer clic en el fondo borroso
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className="bg-slate-900 border-2 border-blue-500/30 p-6 md:p-8 rounded-[2.5rem] max-w-6xl w-full max-h-[90vh] overflow-y-auto relative shadow-[0_0_60px_rgba(37,99,235,0.2)]"
+              // Evitar cerrar al hacer clic dentro del modal
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Botón Cerrar */}
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors bg-black/40 p-2 rounded-full hover:bg-blue-600"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="grid md:grid-cols-12 gap-8 items-center mt-6">
+                {/* Imagen Grande del Certificado */}
+                <div className="md:col-span-8 rounded-2xl overflow-hidden border border-slate-700 bg-black shadow-inner">
+                  <img
+                    src={selectedCert.img}
+                    alt={selectedCert.title}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+
+                {/* Detalles del Módulo */}
+                <div className="md:col-span-4 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Award className="text-blue-500" size={36} strokeWidth={1} />
+                    <span className="text-xs text-blue-400 font-bold uppercase tracking-widest">Formación Profesional</span>
+                  </div>
+                  <h3 className="text-3xl font-black italic text-slate-100 tracking-tighter leading-none">
+                    {selectedCert.title}
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    Bajo la metodología de <span className="text-white font-medium">NewyoRican Mambo</span> Ciudad de México. Módulo completado con excelencia técnica.
+                  </p>
+                  <div className="pt-4 border-t border-slate-800">
+                    <button className="text-xs font-bold text-slate-500 hover:text-blue-400 transition-colors uppercase tracking-widest">
+                      Volver al carrusel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
