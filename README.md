@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Luis Mambo - Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una landing page moderna, dinámica e interactiva para **Luis Nuñez**, Ingeniero de Software y Bailarín Especializado en Mambo. Diseñada para resaltar su perfil profesional, formación de élite certificada (NewyoRican Mambo) y sus servicios de clases personalizadas y talleres grupales.
 
-Currently, two official plugins are available:
+El proyecto está construido con una pila tecnológica moderna (React 19 + Vite), prestando especial atención al detalle visual, animaciones fluidas, y rendimiento, ofreciendo una experiencia premium con una interfaz oscura (dark theme).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tecnologías Principales
 
-## React Compiler
+- **Frontend Framework:** [React 19](https://react.dev/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Lenguaje:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilos:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animaciones:** [Framer Motion](https://www.framer.com/motion/)
+- **Íconos:** [Lucide React](https://lucide.dev/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Características Destacadas
 
-## Expanding the ESLint configuration
+- **Diseño Premium:** Interfaz oscura, elegante, con acentos vibrantes (azul y neón) y efectos de desenfoque (glassmorphism/backdrop-blur).
+- **Animaciones fluidas:** Uso de `framer-motion` para transiciones de los componentes, efectos hover atractivos y revelación progresiva del contenido visual al hacer scroll.
+- **Slider Infinito:** Carrusel animado que presenta automáticamente las certificaciones en un bucle sin fin interactivo, pausándose sutilmente al pasar el ratón.
+- **Modales Interactivos:** Modales fluidos para visualizar certificados en alta resolución y ventana emergente de contacto sin salir de la página, proporcionando una excelente experiencia de usuario.
+- **Totalmente Responsivo:** Estructura adaptable (Mobile First) para verse de forma fenomenal tanto en dispositivos móviles, tablets, como en monitores grandes.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Prerrequisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Asegúrate de tener instalado:
+- [Node.js](https://nodejs.org/) (v18 o superior)
+- `npm` / `yarn` / `pnpm`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Instalación y Ejecución Local
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Navegar a la carpeta del proyecto:**
+   ```bash
+   cd mambo_landing_page
+   ```
+
+2. **Instalar las dependencias:**
+   ```bash
+   npm install
+   ```
+   *(Si utilizas otro gestor de paquetes, usa el comando equivalente, por ejemplo: `yarn install` o `pnpm install`)*
+
+3. **Iniciar el servidor de desarrollo local:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Visualizar el resultado:**
+   Abre inmediatamente el enlace generado en la terminal, típicamente [http://localhost:5173/](http://localhost:5173/).
+
+## 📁 Estructura General del Proyecto
+
+```text
+mambo_landing_page/
+├── public/                 # Assets estáticos (Videos, Imágenes, Certificados locales)
+│   ├── newvideo.mp4        
+│   └── cert_1.jpg ...      
+├── src/                    # Código fuente
+│   ├── App.tsx             # Componente central con toda la estructura de la Single Page Application (SPA)
+│   ├── index.css           # Estilos base y directivas Tailwind CSS v4
+│   ├── main.tsx            # Punto de entrada de la aplicación en React
+│   └── vite-env.d.ts       # Tipos globales del ecosistema Vite
+├── eslint.config.js        # Configuración del linter ESLint
+├── package.json            # Dependencias y configuración de npm
+└── vite.config.ts          # Configuración optimizada de Vite
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📞 Integraciones
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+La landing page ofrece un enlace pre-llenado interactivo dirigido a WhatsApp (`523121016033` como número de contacto principal), facilitando que el usuario final reserve clases al instante, así como opciones directas hacia Instagram y correo electrónico.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📜 Licencia
+
+Todos los derechos reservados. **Luis Nuñez** © 2026. Hecho con ritmo & React.
